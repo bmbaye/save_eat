@@ -30,7 +30,8 @@ public class ProduitMock implements CommandLineRunner {
             prod.setCategorie(ProduitCategorie.FRUIT);
             prod.setPrix(1000.0 * i);
             prod.setDescription("Decription produit " +i);
-            prod.setImages(null);
+            String[] images ={"default_image1.png", "default_image2.png"};
+            prod.setImages(images);
             prod.setPromo(false);
             prod.setDateExpiration(LocalDateTime.now());
             prod.setQteStock(100);

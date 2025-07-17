@@ -28,5 +28,5 @@ public class Produit {
     private ProduitCategorie categorie;
     private ProduitEtat etat;
     private LocalDateTime dateExpiration;
-    private boolean promo;
+    private Boolean promo;
 }
