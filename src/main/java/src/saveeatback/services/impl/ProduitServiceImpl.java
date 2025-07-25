@@ -7,6 +7,7 @@ import src.saveeatback.datas.entities.Produit;
 import src.saveeatback.datas.repositories.ProduitRepository;
 import src.saveeatback.services.ProduitService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,10 @@ public class ProduitServiceImpl implements ProduitService {
     @Override
     public Optional<Produit> getOneProduit(String id) {
         return produitRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Produit> getByLibelle(String libelle) {
+        return this.produitRepository.findByLibelle(libelle);
     }
 }

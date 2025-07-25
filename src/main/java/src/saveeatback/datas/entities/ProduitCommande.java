@@ -14,6 +14,6 @@ public class ProduitCommande {
     private String id;
     private String libelle;
     private Double prix;
-    private int qteCommande;
-    private ProduitEtat etat;
+    private Integer qteCommande;
+
 }

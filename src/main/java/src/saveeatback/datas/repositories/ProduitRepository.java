@@ -26,4 +26,5 @@ public interface ProduitRepository extends MongoRepository<Produit, String> {
     <S extends Produit> S insert(S produit);
 
     <S extends Produit> List<S> insert(Iterable<S> produits);
+
 }

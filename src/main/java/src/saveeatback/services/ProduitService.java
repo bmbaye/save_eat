@@ -14,4 +14,7 @@ public interface ProduitService {
     Produit create(Produit produit);
 
     Optional<Produit> getOneProduit(String id);
+
+    Optional<Produit> getByLibelle(String libelle);
+
 }
