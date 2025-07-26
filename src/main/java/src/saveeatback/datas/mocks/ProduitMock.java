@@ -21,47 +21,73 @@ public class ProduitMock implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<Produit> produits = new ArrayList<>();
+        List<Produit> fruits = new ArrayList<>();
+        List<Produit> legumes = new ArrayList<>();
 
         for (int i =1; i<=5; i++){
-            Produit prod = new Produit();
-            prod.setEtat(ProduitEtat.DISPONIBLE);
+            Produit fruit = new Produit();
+            Produit legume = new Produit();
+            fruit.setEtat(ProduitEtat.DISPONIBLE);
+            legume.setEtat(ProduitEtat.DISPONIBLE);
+            fruit.setCategorie(ProduitCategorie.FRUIT);
+            legume.setCategorie(ProduitCategorie.LEGUME);
             switch (i){
                 case 1:
-                    prod.setLibelle("Pasteque");
-                    prod.setCategorie(ProduitCategorie.FRUIT);
-                    prod.setDescription("Ceci est de la pasteque");
+                    fruit.setLibelle("Pomme");
+                    fruit.setPrix(1000.0);
+                    fruit.setDescription("Ceci est de la Pomme");
+
+                    legume.setLibelle("Carotte");
+                    legume.setDescription("Ceci est de la Carotte");
+                    legume.setPrix(1000.0);
                     break;
                 case 2:
-                    prod.setLibelle("Pomme de terre");
-                    prod.setCategorie(ProduitCategorie.LEGUME);
-                    prod.setDescription("Ceci est de la pomme de terre");
+                    fruit.setLibelle("Poire");
+                    fruit.setDescription("Ceci est de la Poire");
+                    fruit.setPrix(1000.0);
+
+                    legume.setLibelle("Pomme de terre");
+                    legume.setPrix(1000.0);
+                    legume.setDescription("Ceci est de la Pomme de terre");
                     break;
                 case 3:
-                    prod.setLibelle("Bananne ");
-                    prod.setCategorie(ProduitCategorie.FRUIT);
-                    prod.setDescription("Ceci est du bananne");
+                    fruit.setLibelle("Orange");
+                    fruit.setDescription("Ceci est de la Orange");
+                    fruit.setPrix(750.0);
+
+                    legume.setLibelle("Concombre");
+                    legume.setDescription("Ceci est du Concombre");
+                    fruit.setPrix(1200.0);
                     break;
                 case 4:
-                    prod.setLibelle("Aubergine");
-                    prod.setCategorie(ProduitCategorie.LEGUME);
-                    prod.setDescription("Ceci est de l'aubergine");
+                    fruit.setLibelle("Mangue");
+                    fruit.setDescription("Ceci est de la Mangue");
+                    fruit.setPrix(600.0);
+
+                    legume.setLibelle("Oignon");
+                    legume.setDescription("Ceci est de l'Oignon");
+                    legume.setPrix(600.0);
                     break;
                 case 5:
-                    prod.setLibelle("Tomate");
-                    prod.setCategorie(ProduitCategorie.FRUIT);
-                    prod.setDescription("Ceci est de la tomate");
+                    fruit.setLibelle("Ananas");
+                    fruit.setDescription("Ceci est de l'Ananas");
+                    fruit.setPrix(800.0);
+
+                    legume.setLibelle("Poivron");
+                    legume.setDescription("Ceci est du Poivron");
+                    legume.setPrix(500.0);
                     break;
             }
-            prod.setPrix(1000.0 * i);
             String[] images ={"default_image1.png", "default_image2.png"};
-            prod.setImages(images);
-            prod.setPromo(false);
-            prod.setDateExpiration(LocalDateTime.now());
-            prod.setQteStock(100);
-            produits.add(prod);
+            fruit.setImages(images);
+            fruit.setPromo(false);
+            fruit.setDateExpiration(LocalDateTime.now());
+            fruit.setQteStock(150);
+            fruits.add(fruit);
+            legumes.add(legume);
         }
-        produitRepository.saveAll(produits);
+        produitRepository.saveAll(legumes);
+        produitRepository.saveAll(fruits);
         System.out.println("Produits insérés !");
     }
 }

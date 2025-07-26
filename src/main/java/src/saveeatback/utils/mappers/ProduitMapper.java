@@ -1,6 +1,7 @@
 package src.saveeatback.utils.mappers;
 
 import src.saveeatback.datas.entities.Produit;
+import src.saveeatback.datas.entities.ProduitBox;
 import src.saveeatback.datas.entities.ProduitCommande;
 import src.saveeatback.web.dtos.requests.ProduitCommandeDto;
 import src.saveeatback.web.dtos.responses.produits.ProduitCatalogueResponse;
@@ -50,5 +51,14 @@ public class ProduitMapper {
                 .setPrix(produitCommande.getPrix())
                 .setQteCommande(produitCommande.getQteCommande())
                 .build();
+    }
+
+    public static ProduitBox toProduitBox(Produit produit,Integer qte){
+        ProduitBox prod = new ProduitBox();
+        prod.setId(produit.getId());
+        prod.setQte(qte);
+        prod.setLibelle(produit.getLibelle());
+
+        return prod;
     }
 }

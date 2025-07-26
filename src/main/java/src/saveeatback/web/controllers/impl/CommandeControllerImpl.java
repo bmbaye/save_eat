@@ -36,9 +36,9 @@ public class CommandeControllerImpl implements CommandeController {
         if(result.hasErrors()){
             Map<String, Object> errors = new HashMap<>();
             result.getFieldErrors().forEach(err ->errors.put(err.getField(), err.getDefaultMessage()));
-            Map<String, Object> restResponse = RestResponse.response(errors, HttpStatus.NO_CONTENT, "CreationError");
+            Map<String, Object> restResponse = RestResponse.response(errors, HttpStatus.BAD_REQUEST, "CreationError");
 
-            return new ResponseEntity<>(restResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
         }
         Commande cmd = CommandeMapper.toCommandeEntity(commandeDto);
         Livraison livr = this.livraisonService.create(cmd.getLivraison());
@@ -56,6 +56,6 @@ public class CommandeControllerImpl implements CommandeController {
             return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
         }
 
-        return null;
+        return new ResponseEntity<>(RestResponse.response("Erreur interne", HttpStatus.INTERNAL_SERVER_ERROR, "ServerError"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
