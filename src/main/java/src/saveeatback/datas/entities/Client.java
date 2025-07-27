@@ -21,4 +21,5 @@ public class Client {
     private String ville;
     private String rue;
     private String image;
+    private UserEntity user;
 }

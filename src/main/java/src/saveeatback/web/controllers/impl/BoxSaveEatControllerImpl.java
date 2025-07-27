@@ -15,8 +15,10 @@ import java.util.Map;
 @RestController
 public class BoxSaveEatControllerImpl implements BoxSaveEatController {
     private final BoxSaveService boxService;
+    private final BoxMapper boxMapper;
 
-    public BoxSaveEatControllerImpl(BoxSaveService boxService){
+    public BoxSaveEatControllerImpl(BoxSaveService boxService, BoxMapper boxMapper){
+        this.boxMapper = boxMapper;
         this.boxService = boxService;
     }
 
@@ -24,7 +26,7 @@ public class BoxSaveEatControllerImpl implements BoxSaveEatController {
     public ResponseEntity<Map<String, Object>> getBoxSaveEat() {
         BoxSaveEat box = this.boxService.getBoxSaveEat();
 
-        BoxSaveEatResponse boxResponse = BoxMapper.toBoxResponse(box);
+        BoxSaveEatResponse boxResponse = this.boxMapper.toBoxResponse(box);
 
         Map<String, Object> restResponse = RestResponse.response(boxResponse, HttpStatus.OK, "BoxSaveEatResponse");
 

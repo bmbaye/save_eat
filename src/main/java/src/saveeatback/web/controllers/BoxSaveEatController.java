@@ -11,4 +11,6 @@ import java.util.Map;
 public interface BoxSaveEatController {
     @GetMapping("/box-save-eat")
     ResponseEntity<Map<String, Object>> getBoxSaveEat();
+
+
 }

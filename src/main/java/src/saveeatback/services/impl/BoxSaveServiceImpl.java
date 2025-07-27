@@ -20,9 +20,14 @@ import java.util.Random;
 public class BoxSaveServiceImpl implements BoxSaveService {
     private BoxSaveEat box;
     private final ProduitRepository produitRepository;
+    private final ProduitMapper produitMapper;
+    private Double poids;
+    private Double prix;
+    private Double poidsParProduit;
 
-    BoxSaveServiceImpl(ProduitRepository produitRepository){
+    BoxSaveServiceImpl(ProduitRepository produitRepository, ProduitMapper produitMapper){
         this.produitRepository =produitRepository;
+        this.produitMapper = produitMapper;
     }
 
     @PostConstruct
@@ -35,17 +40,12 @@ public class BoxSaveServiceImpl implements BoxSaveService {
     public void generateBoxSaveEat() {
         List<Produit> allProduits = this.produitRepository.findAll();
         Collections.shuffle(allProduits, new Random(LocalDate.now().hashCode()));
-        List<ProduitBox> prodBox = allProduits.stream().map(prod -> ProduitMapper.toProduitBox(prod, 1)).toList();
-
-
-
+        List<ProduitBox> prodBox = allProduits.stream().map(prod -> this.produitMapper.toProduitBox(prod, 1)).toList();
         this.box = new BoxSaveEat();
         this.box.setProduits(prodBox.stream().limit(6).toList());
         this.box.setPrix(3000.0);
         this.box.setPoids(6.0);
     }
-
-
 
     @Override
     public BoxSaveEat getBoxSaveEat() {

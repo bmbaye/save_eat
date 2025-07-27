@@ -1,5 +1,6 @@
 package src.saveeatback.utils.mappers;
 
+import org.springframework.stereotype.Component;
 import src.saveeatback.datas.entities.Produit;
 import src.saveeatback.datas.entities.ProduitBox;
 import src.saveeatback.datas.entities.ProduitCommande;
@@ -8,9 +9,10 @@ import src.saveeatback.web.dtos.responses.produits.ProduitCatalogueResponse;
 import src.saveeatback.web.dtos.responses.produits.ProduitCmdResponse;
 import src.saveeatback.web.dtos.responses.produits.SingleProduitResponse;
 
+@Component
 public class ProduitMapper {
 
-    public static ProduitCatalogueResponse responseCatlogue(Produit produit){
+    public ProduitCatalogueResponse responseCatlogue(Produit produit){
         return ProduitCatalogueResponse.builder()
                 .setId(produit.getId())
                 .setLibelle(produit.getLibelle())
@@ -22,7 +24,7 @@ public class ProduitMapper {
                 .build();
     }
 
-    public static SingleProduitResponse singleResponse(Produit produit){
+    public SingleProduitResponse singleResponse(Produit produit){
         return SingleProduitResponse.builder()
                 .setId(produit.getId())
                 .setLibelle(produit.getLibelle())
@@ -34,7 +36,7 @@ public class ProduitMapper {
                 .build();
     }
 
-    public static ProduitCommande toProduitCommandeRequest(ProduitCommandeDto produitCommandeDto){
+    public ProduitCommande toProduitCommandeRequest(ProduitCommandeDto produitCommandeDto){
         ProduitCommande prodCmd = new ProduitCommande();
         prodCmd.setId(produitCommandeDto.getId());
         prodCmd.setQteCommande(produitCommandeDto.getQteCommandee());
@@ -44,7 +46,7 @@ public class ProduitMapper {
         return prodCmd;
     }
 
-    public static ProduitCmdResponse toProduitCmdResponse(ProduitCommande produitCommande){
+    public ProduitCmdResponse toProduitCmdResponse(ProduitCommande produitCommande){
         return ProduitCmdResponse.builder()
                 .setId(produitCommande.getId())
                 .setLibelle(produitCommande.getLibelle())
@@ -53,7 +55,7 @@ public class ProduitMapper {
                 .build();
     }
 
-    public static ProduitBox toProduitBox(Produit produit,Integer qte){
+    public ProduitBox toProduitBox(Produit produit,Integer qte){
         ProduitBox prod = new ProduitBox();
         prod.setId(produit.getId());
         prod.setQte(qte);

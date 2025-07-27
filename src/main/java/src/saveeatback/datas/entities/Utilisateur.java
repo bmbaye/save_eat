@@ -6,19 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import src.saveeatback.datas.enums.RoleUser;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "livreurs")
-public class Livreur {
+@Document(collection = "utilisateurs")
+public class Utilisateur {
     @Id
     private String id;
-    private String nom;
-    private String prenom;
-    private String telephone;
-    private String adresse;
-    private String image;
-    private UserEntity user;
+    private String username;
+    private String password;
+    private RoleUser role;
 }

@@ -2,6 +2,7 @@ package src.saveeatback.utils.validators.impl;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import src.saveeatback.datas.repositories.UtilisateurRepository;
 import src.saveeatback.utils.validators.ListNotEmpty;
 
 import java.util.ArrayList;

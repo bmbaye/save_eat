@@ -6,19 +6,21 @@ import lombok.Getter;
 import src.saveeatback.datas.entities.Livreur;
 import src.saveeatback.datas.enums.HoraireLivraison;
 import src.saveeatback.datas.enums.TypeLivraison;
+import src.saveeatback.utils.validators.ValidTypeLivraison;
 
 import java.util.Date;
 
 @Getter
 public class LivraisonSubmitted {
-    private TypeLivraison type;
+    @ValidTypeLivraison
+    private String type;
     @NotNull(message = "La date de livraison est obligatoire !!")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateLivraison;
     @NotNull(message = "L'horaire de livraison est obligatoire")
     private HoraireLivraison horaire;
     @NotNull(message = "Le livreur est obligatoire")
-    private Livreur livreur;
+    private String livreurId;
     @NotNull
     private String ville;
     @NotNull

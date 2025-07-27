@@ -3,19 +3,23 @@ package src.saveeatback.web.dtos.requests;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import src.saveeatback.datas.entities.Client;
+import src.saveeatback.datas.enums.TypePaiement;
+import src.saveeatback.utils.validators.ExistingClient;
 import src.saveeatback.utils.validators.ListNotEmpty;
+import src.saveeatback.utils.validators.ValidTypePaiement;
 
 import java.util.List;
 
 @Getter
 public class CommandeSubmittedDto {
-
     @ListNotEmpty
     private List<ProduitCommandeDto> produits;
     @NotNull(message = "L'id du client est obligatoire !")
-    private Client client;
+    @ExistingClient
+    private String clientId;
     @NotNull
     private LivraisonSubmitted livraison;
     @NotNull
-    private PaiementCommandeDto paiement;
+    @ValidTypePaiement
+    private String typePaiement;
 }

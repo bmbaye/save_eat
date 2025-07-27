@@ -24,16 +24,18 @@ import java.util.Optional;
 public class ProduitControllerImpl implements ProduitController {
 
     private final ProduitService produitService;
+    private final ProduitMapper produitMapper;
 
-    public ProduitControllerImpl(ProduitService produitService){
+    public ProduitControllerImpl(ProduitService produitService,ProduitMapper produitMapper){
         this.produitService =produitService;
+        this.produitMapper = produitMapper;
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> getProduits(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         var produits = this.produitService.getProduits(pageable);
-        List<ProduitCatalogueResponse> produitDtos = produits.map(ProduitMapper::responseCatlogue).toList();
+        List<ProduitCatalogueResponse> produitDtos = produits.map(this.produitMapper::responseCatlogue).toList();
 
         int totalPages = produits.getTotalPages();
         Map<String, Object> produitsRestResponse = RestResponse.paginatedResponse(
@@ -55,7 +57,7 @@ public class ProduitControllerImpl implements ProduitController {
     public ResponseEntity<Map<String, Object>> getOneById(String id) {
         Optional<Produit> produit = produitService.getOneProduit(id);
         if(produit.isPresent()){
-            SingleProduitResponse produitDto = ProduitMapper.singleResponse(produit.get());
+            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
 
             Map<String, Object> restResonse = RestResponse.response(produitDto,HttpStatus.OK,"SingleProduitResponse");
             return new ResponseEntity<>(restResonse, HttpStatus.OK);
@@ -67,7 +69,7 @@ public class ProduitControllerImpl implements ProduitController {
     public ResponseEntity<Map<String, Object>> getOneByLibelle(String libelle) {
         Optional<Produit> produit = produitService.getByLibelle(libelle);
         if(produit.isPresent()){
-            SingleProduitResponse produitDto = ProduitMapper.singleResponse(produit.get());
+            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
 
             Map<String, Object> restResponse = RestResponse.response(produitDto, HttpStatus.OK, "SingleProduitResponse");
 
