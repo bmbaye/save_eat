@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import src.saveeatback.datas.entities.Livraison;
 import src.saveeatback.datas.entities.Livreur;
 import src.saveeatback.datas.enums.EtatLivraison;
+import src.saveeatback.datas.enums.HoraireLivraison;
 import src.saveeatback.datas.enums.TypeLivraison;
 import src.saveeatback.datas.repositories.LivreurRepository;
 import src.saveeatback.web.dtos.requests.LivraisonSubmitted;
@@ -21,14 +22,13 @@ public class LivraisonMapper {
 
     public Livraison toLivraison(LivraisonSubmitted livraisonSubmitted){
         Livraison livraison = new Livraison();
-        Optional<Livreur> livreur = livreurRepository.findById(livraisonSubmitted.getLivreurId());
 
         livraison.setDateLivraison(livraisonSubmitted.getDateLivraison());
         livraison.setEtat(EtatLivraison.EN_OPERATION);
-        livraison.setLivreur(livreur.get());
+        livraison.setLivreur(null);
         livraison.setRue(livraisonSubmitted.getRue());
         livraison.setVille(livraisonSubmitted.getVille());
-        livraison.setHoraire(livraisonSubmitted.getHoraire());
+        livraison.setHoraire(HoraireLivraison.valueOf(livraisonSubmitted.getHoraire().toUpperCase()));
         livraison.setType(TypeLivraison.valueOf(livraisonSubmitted.getType().toUpperCase()));
 
         return livraison;

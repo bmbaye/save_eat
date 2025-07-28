@@ -28,11 +28,11 @@ public class CommandeMapper {
         this.produitMapper = produitMapper;
     }
     public Commande toCommandeEntity(CommandeSubmittedDto commandeDto){
-        Double montant = getMontantCmd(commandeDto.getProduits(), TypeLivraison.valueOf(commandeDto.getLivraison().getType()));
+        Double montant = getMontantCmd(commandeDto.getProduits(), TypeLivraison.valueOf(commandeDto.getLivraison().getType().toUpperCase()));
         Optional<Client> client = clientRepository.findById(commandeDto.getClientId());
 
         Paiement paiement = new Paiement();
-        paiement.setType(TypePaiement.valueOf(commandeDto.getTypePaiement()));
+        paiement.setType(TypePaiement.valueOf(commandeDto.getTypePaiement().toUpperCase()));
         paiement.setEtat(EtatPaiement.A_EFFECTUER);
         paiement.setMontant(montant);
         paiement.setDateEffectuee(null);

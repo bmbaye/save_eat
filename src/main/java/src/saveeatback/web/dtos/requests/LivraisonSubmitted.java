@@ -18,9 +18,7 @@ public class LivraisonSubmitted {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateLivraison;
     @NotNull(message = "L'horaire de livraison est obligatoire")
-    private HoraireLivraison horaire;
-    @NotNull(message = "Le livreur est obligatoire")
-    private String livreurId;
+    private String horaire;
     @NotNull
     private String ville;
     @NotNull
