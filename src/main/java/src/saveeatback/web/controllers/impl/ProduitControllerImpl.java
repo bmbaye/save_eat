@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@Tag(name = "produits", description = "gestion produits")
 public class ProduitControllerImpl implements ProduitController {
 
     private final ProduitService produitService;

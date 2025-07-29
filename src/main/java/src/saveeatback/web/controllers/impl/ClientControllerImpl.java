@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Tag(name = "clients", description = "gestion clients")
 public class ClientControllerImpl implements ClientController {
     private final ClientMapper clientMapper;
     private final ClientService clientService;

@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import src.saveeatback.web.dtos.responses.box.BoxSaveEatResponse;
 import java.util.Map;
 
 @RestController
+@Tag(name = "boxsave", description = "gestion box saveeat")
 public class BoxSaveEatControllerImpl implements BoxSaveEatController {
     private final BoxSaveService boxService;
     private final BoxMapper boxMapper;

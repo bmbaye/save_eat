@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Tag(name = "utilisateurs", description = "gestion utilisateurs")
 public class UtilisateurControllerImpl implements UtilisateurController {
     private final UtilisateurService userService;
     private final UtilisateurMapper userMapper;

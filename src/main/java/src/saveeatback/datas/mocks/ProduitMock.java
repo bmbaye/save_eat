@@ -80,9 +80,13 @@ public class ProduitMock implements CommandLineRunner {
             }
             String[] images ={"default_image1.png", "default_image2.png"};
             fruit.setImages(images);
+            legume.setImages(images);
             fruit.setPromo(false);
+            legume.setPromo(false);
             fruit.setDateExpiration(LocalDateTime.now());
+            legume.setDateExpiration(LocalDateTime.now());
             fruit.setQteStock(150);
+            legume.setQteStock(150);
             fruits.add(fruit);
             legumes.add(legume);
         }

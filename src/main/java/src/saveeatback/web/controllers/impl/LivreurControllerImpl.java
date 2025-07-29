@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jdk.jshell.execution.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Tag(name = "livreurs", description = "gestion livreurs")
 public class LivreurControllerImpl implements LivreurController {
     private final LivreurService livreurService;
     private final LivreurMapper livreurMapper;

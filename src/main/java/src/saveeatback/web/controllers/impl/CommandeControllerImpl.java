@@ -1,5 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Tag(name = "commandes", description = "gestion commandes")
 public class CommandeControllerImpl implements CommandeController {
 
     private final CommandeService commandeService;
