@@ -1,30 +1,17 @@
 package src.saveeatback.utils.mappers;
 
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import src.saveeatback.datas.entities.Utilisateur;
-import src.saveeatback.datas.enums.RoleUser;
 import src.saveeatback.web.dtos.requests.SignupRequest;
 import src.saveeatback.web.dtos.responses.utilisateur.UserCreateResponse;
 
-@Component
-public class UtilisateurMapper {
+@Mapper(componentModel = "spring")
+public interface UtilisateurMapper {
 
-    public Utilisateur toUtilisateurEntity(SignupRequest userRequest){
-        Utilisateur user = new Utilisateur();
+    UtilisateurMapper INSTANCE = Mappers.getMapper(UtilisateurMapper.class);
 
-        user.setUsername(userRequest.getUsername());
-        user.setPassword(userRequest.getPassword());
-//        user.setRole(RoleUser.valueOf(userRequest.getRole().toUpperCase()));
+    Utilisateur signupDtoToUser(SignupRequest signupDto);
 
-        return user;
-    }
-
-    public UserCreateResponse toUserCreateResponse(Utilisateur user){
-        return UserCreateResponse.builder()
-                .setIdUser(user.getId())
-                .setUsername(user.getUsername())
-                .setMessage("Utilisateur cree avec succes !!")
-                .build();
-    }
-
+    UserCreateResponse toUserCreateResponse(Utilisateur utilisateur);
 }

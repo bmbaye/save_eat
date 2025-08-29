@@ -6,6 +6,8 @@ import lombok.Setter;
 import src.saveeatback.utils.validators.IsValidEmail;
 import src.saveeatback.utils.validators.UniqueUsername;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class SignupRequest {
@@ -16,5 +18,5 @@ public class SignupRequest {
     @IsValidEmail
     private String email;
     @NotNull
-    private String role;
+    private List<String> roles;
 }

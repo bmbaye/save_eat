@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import src.saveeatback.datas.entities.Produit;
 import src.saveeatback.exceptions.EntityNotFoundException;
 import src.saveeatback.services.ProduitService;
-import src.saveeatback.services.impl.ProduitServiceImpl;
-import src.saveeatback.utils.mappers.ProduitMapper;
 import src.saveeatback.web.controllers.ProduitController;
 import src.saveeatback.web.dtos.responses.RestResponse;
 import src.saveeatback.web.dtos.responses.produits.ProduitCatalogueResponse;
 import src.saveeatback.web.dtos.responses.produits.SingleProduitResponse;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,23 +23,23 @@ import java.util.Optional;
 public class ProduitControllerImpl implements ProduitController {
 
     private final ProduitService produitService;
-    private final ProduitMapper produitMapper;
+//    private final ProduitMapper produitMapper;
 
-    public ProduitControllerImpl(ProduitService produitService,ProduitMapper produitMapper){
+    public ProduitControllerImpl(ProduitService produitService){
         this.produitService =produitService;
-        this.produitMapper = produitMapper;
+//        this.produitMapper = produitMapper;
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> getProduits(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         var produits = this.produitService.getProduits(pageable);
-        List<ProduitCatalogueResponse> produitDtos = produits.map(this.produitMapper::responseCatlogue).toList();
+//        List<ProduitCatalogueResponse> produitDtos = produits.map(this.produitMapper::responseCatlogue).toList();
 
         int totalPages = produits.getTotalPages();
         Map<String, Object> produitsRestResponse = RestResponse.paginatedResponse(
                 HttpStatus.OK,
-                produitDtos,
+                "produitDtos",
                 new int[totalPages],
                 produits.getPageable().getPageNumber(),
                 totalPages,
@@ -59,9 +56,9 @@ public class ProduitControllerImpl implements ProduitController {
     public ResponseEntity<Map<String, Object>> getOneById(String id) {
         Optional<Produit> produit = produitService.getOneProduit(id);
         if(produit.isPresent()){
-            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
+//            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
 
-            Map<String, Object> restResonse = RestResponse.response(produitDto,HttpStatus.OK,"SingleProduitResponse");
+            Map<String, Object> restResonse = RestResponse.response("produitDto",HttpStatus.OK,"SingleProduitResponse");
             return new ResponseEntity<>(restResonse, HttpStatus.OK);
         }
         return null;
@@ -71,9 +68,9 @@ public class ProduitControllerImpl implements ProduitController {
     public ResponseEntity<Map<String, Object>> getOneByLibelle(String libelle) {
         Optional<Produit> produit = produitService.getByLibelle(libelle);
         if(produit.isPresent()){
-            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
+//            SingleProduitResponse produitDto = this.produitMapper.singleResponse(produit.get());
 
-            Map<String, Object> restResponse = RestResponse.response(produitDto, HttpStatus.OK, "SingleProduitResponse");
+            Map<String, Object> restResponse = RestResponse.response("produitDto", HttpStatus.OK, "SingleProduitResponse");
 
             return new ResponseEntity<>(restResponse, HttpStatus.OK);
         }

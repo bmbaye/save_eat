@@ -9,14 +9,12 @@ import src.saveeatback.datas.entities.*;
 import src.saveeatback.services.CommandeService;
 import src.saveeatback.services.LivraisonService;
 import src.saveeatback.services.PaiementService;
-import src.saveeatback.utils.mappers.CommandeMapper;
 import src.saveeatback.web.controllers.CommandeController;
 import src.saveeatback.web.dtos.requests.CommandeSubmittedDto;
 import src.saveeatback.web.dtos.responses.RestResponse;
 import src.saveeatback.web.dtos.responses.commandes.CommandeResponse;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,13 +24,13 @@ public class CommandeControllerImpl implements CommandeController {
     private final CommandeService commandeService;
     private final PaiementService paiementService;
     private final LivraisonService livraisonService;
-    private final CommandeMapper commandeMapper;
+//    private final CommandeMapper commandeMapper;
 
-    CommandeControllerImpl(CommandeService commandeService, LivraisonService livraisonService, PaiementService paiementService, CommandeMapper commandeMapper){
+    CommandeControllerImpl(CommandeService commandeService, LivraisonService livraisonService, PaiementService paiementService){
         this.commandeService =commandeService;
         this.paiementService = paiementService;
         this.livraisonService = livraisonService;
-        this.commandeMapper = commandeMapper;
+//        this.commandeMapper = commandeMapper;
     }
     @Override
     public ResponseEntity<Map<String, Object>> createCmd(CommandeSubmittedDto commandeDto, BindingResult result) {
@@ -43,21 +41,21 @@ public class CommandeControllerImpl implements CommandeController {
 
             return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
         }
-        Commande cmd = this.commandeMapper.toCommandeEntity(commandeDto);
-        Livraison livr = this.livraisonService.create(cmd.getLivraison());
-        Paiement pment = this.paiementService.create(cmd.getPaiement());
-        cmd.setLivraison(livr);
-        cmd.setPaiement(pment);
-        Commande response = this.commandeService.create(cmd);
+//        Commande cmd = this.commandeMapper.toCommandeEntity(commandeDto);
+//        Livraison livr = this.livraisonService.create(cmd.getLivraison());
+//        Paiement pment = this.paiementService.create(cmd.getPaiement());
+//        cmd.setLivraison(livr);
+//        cmd.setPaiement(pment);
+//        Commande response = this.commandeService.create(cmd);
 
-        if(response !=null){
-            System.out.println("Okkkkk on y est");
-            CommandeResponse cmdResponse = this.commandeMapper.toCommandeResponse(cmd);
-
-            Map<String, Object> restResponse = RestResponse.response(cmdResponse, HttpStatus.CREATED, "CommandeResponse");
-
-            return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
-        }
+//        if(response !=null){
+//            System.out.println("Okkkkk on y est");
+//            CommandeResponse cmdResponse = this.commandeMapper.toCommandeResponse(cmd);
+//
+//            Map<String, Object> restResponse = RestResponse.response(cmdResponse, HttpStatus.CREATED, "CommandeResponse");
+//
+//            return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
+//        }
 
         return new ResponseEntity<>(RestResponse.response("Erreur interne", HttpStatus.INTERNAL_SERVER_ERROR, "ServerError"), HttpStatus.INTERNAL_SERVER_ERROR);
     }

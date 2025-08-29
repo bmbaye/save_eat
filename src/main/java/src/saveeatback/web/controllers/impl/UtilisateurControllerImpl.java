@@ -1,6 +1,7 @@
 package src.saveeatback.web.controllers.impl;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,7 +21,9 @@ import java.util.Map;
 @Tag(name = "utilisateurs", description = "gestion utilisateurs")
 public class UtilisateurControllerImpl implements UtilisateurController {
     private final UtilisateurService userService;
-    private final UtilisateurMapper userMapper;
+
+    @Autowired
+    private UtilisateurMapper userMapper;
 
     UtilisateurControllerImpl(UtilisateurService userService, UtilisateurMapper userMapper){
         this.userService =userService;
@@ -38,7 +41,7 @@ public class UtilisateurControllerImpl implements UtilisateurController {
             return new ResponseEntity<>(restResponse,HttpStatus.BAD_REQUEST);
         }
 
-        Utilisateur user = this.userMapper.toUtilisateurEntity(userRequest);
+        Utilisateur user = this.userMapper.signupDtoToUser(userRequest);
         var userPosted = this.userService.create(user);
         if(userPosted !=null){
             UserCreateResponse userResponse = this.userMapper.toUserCreateResponse(userPosted);

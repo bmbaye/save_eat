@@ -74,7 +74,8 @@ public class AuthControllerImpl implements AuthController {
         }
 
         Set<String> roles = new HashSet<>();
-        roles.add(signupRequest.getRole());
+        signupRequest.getRoles().stream().map(roles::add);
+
 
         Utilisateur user =new Utilisateur(signupRequest.getUsername(),signupRequest.getEmail(),encoder.encode(signupRequest.getPassword()),roles);
         Map<String,Object> response = RestResponse.response(userRepository.save(user),HttpStatus.CREATED,"userSignup");

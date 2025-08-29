@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import src.saveeatback.datas.entities.Client;
 import src.saveeatback.datas.entities.UserEntity;
 import src.saveeatback.datas.entities.Utilisateur;
-import src.saveeatback.datas.enums.RoleUser;
 import src.saveeatback.services.ClientService;
 import src.saveeatback.services.UtilisateurService;
-import src.saveeatback.utils.mappers.ClientMapper;
 import src.saveeatback.web.controllers.ClientController;
 import src.saveeatback.web.dtos.requests.ClientPosted;
 import src.saveeatback.web.dtos.responses.RestResponse;
@@ -23,12 +21,11 @@ import java.util.Map;
 @RestController
 @Tag(name = "clients", description = "gestion clients")
 public class ClientControllerImpl implements ClientController {
-    private final ClientMapper clientMapper;
+//    private final ClientMapper clientMapper;
     private final ClientService clientService;
     private final UtilisateurService utilisateurService;
 
-    ClientControllerImpl(ClientMapper clientMapper,ClientService clientService, UtilisateurService utilisateurService ){
-        this.clientMapper =clientMapper;
+    ClientControllerImpl(ClientService clientService, UtilisateurService utilisateurService ){
         this.utilisateurService =utilisateurService;
         this.clientService =clientService;
     }
@@ -43,11 +40,11 @@ public class ClientControllerImpl implements ClientController {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
-        Client client = this.clientMapper.toClientEntity(clientRequest);
+//        Client client = this.clientMapper.toClientEntity(clientRequest);
 
         Utilisateur user = new Utilisateur();
-        user.setUsername(client.getUser().getUsername());
-        user.setPassword(client.getUser().getPassword());
+//        user.setUsername(client.getUser().getUsername());
+//        user.setPassword(client.getUser().getPassword());
 //        user.setRoles(RoleUser.CLIENT);
 
         Utilisateur userPosted = this.utilisateurService.create(user);
@@ -57,13 +54,13 @@ public class ClientControllerImpl implements ClientController {
         userEntity.setUsername(userPosted.getUsername());
         userEntity.setPassword(userPosted.getPassword());
 
-        client.setUser(userEntity);
+//        client.setUser(userEntity);
 
-        Client clientPosted = this.clientService.create(client);
+//        Client clientPosted = this.clientService.create(client);
 
-        ClientCreateResponse clientResponse = clientMapper.toClientCreateResponse(clientPosted);
+//        ClientCreateResponse clientResponse = clientMapper.toClientCreateResponse(clientPosted);
 
-        Map<String,Object> restResponse = RestResponse.response(clientResponse, HttpStatus.CREATED, "ClientCreateResponse");
+        Map<String,Object> restResponse = RestResponse.response("clientResponse", HttpStatus.CREATED, "ClientCreateResponse");
 
         return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
     }

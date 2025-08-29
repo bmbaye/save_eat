@@ -1,7 +1,6 @@
 package src.saveeatback.web.controllers.impl;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jdk.jshell.execution.Util;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -9,10 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import src.saveeatback.datas.entities.Livreur;
 import src.saveeatback.datas.entities.UserEntity;
 import src.saveeatback.datas.entities.Utilisateur;
-import src.saveeatback.datas.enums.RoleUser;
 import src.saveeatback.services.LivreurService;
 import src.saveeatback.services.UtilisateurService;
-import src.saveeatback.utils.mappers.LivreurMapper;
 import src.saveeatback.web.controllers.LivreurController;
 import src.saveeatback.web.dtos.requests.LivreurPosted;
 import src.saveeatback.web.dtos.responses.RestResponse;
@@ -25,11 +22,11 @@ import java.util.Map;
 @Tag(name = "livreurs", description = "gestion livreurs")
 public class LivreurControllerImpl implements LivreurController {
     private final LivreurService livreurService;
-    private final LivreurMapper livreurMapper;
+//    private final LivreurMapper livreurMapper;
     private final UtilisateurService userService;
 
-    LivreurControllerImpl(LivreurService livreurService, LivreurMapper livreurMapper, UtilisateurService userService){
-        this.livreurMapper =livreurMapper;
+    LivreurControllerImpl(LivreurService livreurService, UtilisateurService userService){
+//        this.livreurMapper =livreurMapper;
         this.livreurService =livreurService;
         this.userService =userService;
     }
@@ -44,13 +41,13 @@ public class LivreurControllerImpl implements LivreurController {
             return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
         }
 
-        Livreur livreur = this.livreurMapper.toLivreurEntity(livreurRequest);
+//        Livreur livreur = this.livreurMapper.toLivreurEntity(livreurRequest);
 
         Utilisateur user =new Utilisateur();
 
 //        user.setRole(RoleUser.LIVREUR);
-        user.setUsername(livreur.getUser().getUsername());
-        user.setPassword(livreur.getUser().getPassword());
+//        user.setUsername(livreur.getUser().getUsername());
+//        user.setPassword(livreur.getUser().getPassword());
 
         Utilisateur userAdded = this.userService.create(user);
 
@@ -59,13 +56,13 @@ public class LivreurControllerImpl implements LivreurController {
         userEntity.setUsername(userAdded.getUsername());
         userEntity.setUserID(userAdded.getId());
 
-        livreur.setUser(userEntity);
+//        livreur.setUser(userEntity);
 
-        Livreur livreurAdded = this.livreurService.create(livreur);
+//        Livreur livreurAdded = this.livreurService.create(livreur);
+//
+//        LivreurCreateResponse livreurResponseDto = this.livreurMapper.toLivreurCreateResponse(livreurAdded);
 
-        LivreurCreateResponse livreurResponseDto = this.livreurMapper.toLivreurCreateResponse(livreurAdded);
-
-        Map<String,Object> restResponse = RestResponse.response(livreurResponseDto, HttpStatus.CREATED, "LivreurCreateResponse");
+        Map<String,Object> restResponse = RestResponse.response("livreurResponseDto", HttpStatus.CREATED, "LivreurCreateResponse");
 
         return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
     }
