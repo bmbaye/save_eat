@@ -13,9 +13,7 @@ import src.saveeatback.services.ClientService;
 import src.saveeatback.services.UtilisateurService;
 import src.saveeatback.utils.mappers.ClientMapper;
 import src.saveeatback.web.controllers.ClientController;
-import src.saveeatback.web.controllers.UtilisateurController;
 import src.saveeatback.web.dtos.requests.ClientPosted;
-import src.saveeatback.web.dtos.requests.UtilisateurPosted;
 import src.saveeatback.web.dtos.responses.RestResponse;
 import src.saveeatback.web.dtos.responses.client.ClientCreateResponse;
 
@@ -50,7 +48,7 @@ public class ClientControllerImpl implements ClientController {
         Utilisateur user = new Utilisateur();
         user.setUsername(client.getUser().getUsername());
         user.setPassword(client.getUser().getPassword());
-        user.setRole(RoleUser.CLIENT);
+//        user.setRoles(RoleUser.CLIENT);
 
         Utilisateur userPosted = this.utilisateurService.create(user);
 

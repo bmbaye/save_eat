@@ -9,7 +9,7 @@ import src.saveeatback.datas.entities.Utilisateur;
 import src.saveeatback.services.UtilisateurService;
 import src.saveeatback.utils.mappers.UtilisateurMapper;
 import src.saveeatback.web.controllers.UtilisateurController;
-import src.saveeatback.web.dtos.requests.UtilisateurPosted;
+import src.saveeatback.web.dtos.requests.SignupRequest;
 import src.saveeatback.web.dtos.responses.RestResponse;
 import src.saveeatback.web.dtos.responses.utilisateur.UserCreateResponse;
 
@@ -29,7 +29,7 @@ public class UtilisateurControllerImpl implements UtilisateurController {
 
 
     @Override
-    public ResponseEntity<Map<String, Object>> createUser(UtilisateurPosted userRequest, BindingResult result) {
+    public ResponseEntity<Map<String, Object>> createUser(SignupRequest userRequest, BindingResult result) {
         if(result.hasErrors()){
             Map<String, Object> errors = new HashMap<>();
             result.getFieldErrors().forEach(err ->errors.put(err.getField(), err.getDefaultMessage()));

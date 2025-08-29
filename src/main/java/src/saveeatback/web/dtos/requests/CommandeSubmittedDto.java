@@ -2,8 +2,6 @@ package src.saveeatback.web.dtos.requests;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import src.saveeatback.datas.entities.Client;
-import src.saveeatback.datas.enums.TypePaiement;
 import src.saveeatback.utils.validators.ExistingClient;
 import src.saveeatback.utils.validators.ListNotEmpty;
 import src.saveeatback.utils.validators.ValidTypePaiement;

@@ -48,7 +48,7 @@ public class LivreurControllerImpl implements LivreurController {
 
         Utilisateur user =new Utilisateur();
 
-        user.setRole(RoleUser.LIVREUR);
+//        user.setRole(RoleUser.LIVREUR);
         user.setUsername(livreur.getUser().getUsername());
         user.setPassword(livreur.getUser().getPassword());
 
