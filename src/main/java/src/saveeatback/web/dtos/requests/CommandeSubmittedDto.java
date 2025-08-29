@@ -1,14 +1,13 @@
 package src.saveeatback.web.dtos.requests;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
 import src.saveeatback.utils.validators.ExistingClient;
 import src.saveeatback.utils.validators.ListNotEmpty;
 import src.saveeatback.utils.validators.ValidTypePaiement;
 
 import java.util.List;
 
-@Getter
+
 public class CommandeSubmittedDto {
     @ListNotEmpty
     private List<ProduitCommandeDto> produits;
@@ -20,4 +19,20 @@ public class CommandeSubmittedDto {
     @NotNull
     @ValidTypePaiement
     private String typePaiement;
+
+    public List<ProduitCommandeDto> getProduits() {
+        return produits;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public LivraisonSubmitted getLivraison() {
+        return livraison;
+    }
+
+    public String getTypePaiement() {
+        return typePaiement;
+    }
 }

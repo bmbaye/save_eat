@@ -1,15 +1,25 @@
 package src.saveeatback.web.dtos.responses.box;
 
-import lombok.Getter;
 import src.saveeatback.datas.entities.ProduitBox;
 
 import java.util.List;
 
-@Getter
 public class BoxSaveEatResponse {
     private List<ProduitBox> produits;
     private Double poids;
     private Double prix;
+
+    public List<ProduitBox> getProduits() {
+        return produits;
+    }
+
+    public Double getPoids() {
+        return poids;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
 
     public static class Builder{
         private List<ProduitBox> produits;

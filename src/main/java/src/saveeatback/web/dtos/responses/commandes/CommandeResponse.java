@@ -1,18 +1,14 @@
 package src.saveeatback.web.dtos.responses.commandes;
 
-import lombok.Getter;
 
-import src.saveeatback.datas.entities.ProduitCommande;
 import src.saveeatback.datas.enums.EtatCommande;
 import src.saveeatback.datas.enums.TypePaiement;
-import src.saveeatback.web.dtos.responses.produits.ProduitCmdResponse;
 
-import java.util.List;
 
-@Getter
+
 public class CommandeResponse {
     private String id;
-    private List<ProduitCmdResponse> produits;
+//    private List<ProduitCmd> produits;
     private EtatCommande etatCommande;
     private Integer nombrePoduits;
     private TypePaiement typePaiement;
@@ -20,9 +16,65 @@ public class CommandeResponse {
     private String livraisonId;
     private String clientId;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getLivraisonId() {
+        return livraisonId;
+    }
+
+    public void setLivraisonId(String livraisonId) {
+        this.livraisonId = livraisonId;
+    }
+
+    public Double getMontant() {
+        return montant;
+    }
+
+    public void setMontant(Double montant) {
+        this.montant = montant;
+    }
+
+    public TypePaiement getTypePaiement() {
+        return typePaiement;
+    }
+
+    public void setTypePaiement(TypePaiement typePaiement) {
+        this.typePaiement = typePaiement;
+    }
+
+    public Integer getNombrePoduits() {
+        return nombrePoduits;
+    }
+
+    public void setNombrePoduits(Integer nombrePoduits) {
+        this.nombrePoduits = nombrePoduits;
+    }
+
+    public EtatCommande getEtatCommande() {
+        return etatCommande;
+    }
+
+    public void setEtatCommande(EtatCommande etatCommande) {
+        this.etatCommande = etatCommande;
+    }
+
     public static class Builder{
         private String id;
-        private List<ProduitCmdResponse> produits;
+//        private List<ProduitCmdResponse> produits;
         private EtatCommande etatCommande;
         private Integer nombrePoduits;
         private TypePaiement typePaiement;
@@ -35,10 +87,10 @@ public class CommandeResponse {
             return this;
         }
 
-        public Builder setProduits(List<ProduitCmdResponse> produits) {
-            this.produits = produits;
-            return this;
-        }
+//        public Builder setProduits(List<ProduitCmdResponse> produits) {
+//            this.produits = produits;
+//            return this;
+//        }
 
         public Builder setEtatCommande(EtatCommande etatCommande) {
             this.etatCommande = etatCommande;
@@ -83,7 +135,7 @@ public class CommandeResponse {
         this.montant = builder.montant;
         this.livraisonId = builder.livraisonId;
         this.nombrePoduits = builder.nombrePoduits;
-        this.produits = builder.produits;
+//        this.produits = builder.produits;
         this.typePaiement = builder.typePaiement;
     }
 }

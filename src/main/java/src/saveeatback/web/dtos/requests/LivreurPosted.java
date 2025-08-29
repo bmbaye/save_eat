@@ -1,13 +1,9 @@
 package src.saveeatback.web.dtos.requests;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
-import src.saveeatback.datas.entities.UserEntity;
 import src.saveeatback.utils.validators.UniqueLivreurTelephone;
 import src.saveeatback.utils.validators.UniqueUsername;
 
-@Getter
 public class LivreurPosted {
     @NotNull
     private String nom;
@@ -25,4 +21,32 @@ public class LivreurPosted {
     private String username;
     @NotNull
     private String password;
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

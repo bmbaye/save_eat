@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
-import src.saveeatback.datas.entities.Livreur;
 import src.saveeatback.datas.entities.UserEntity;
 import src.saveeatback.datas.entities.Utilisateur;
 import src.saveeatback.services.LivreurService;
@@ -13,7 +12,6 @@ import src.saveeatback.services.UtilisateurService;
 import src.saveeatback.web.controllers.LivreurController;
 import src.saveeatback.web.dtos.requests.LivreurPosted;
 import src.saveeatback.web.dtos.responses.RestResponse;
-import src.saveeatback.web.dtos.responses.livreur.LivreurCreateResponse;
 
 import java.util.HashMap;
 import java.util.Map;

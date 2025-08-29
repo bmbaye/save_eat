@@ -1,10 +1,6 @@
 package src.saveeatback.web.dtos.responses.client;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class ClientCreateResponse {
     private String id;
     private String nomComplet;
@@ -12,6 +8,54 @@ public class ClientCreateResponse {
     private String telephone;
     private String adresse;
     private String message;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public static class Builder{
         private String id;

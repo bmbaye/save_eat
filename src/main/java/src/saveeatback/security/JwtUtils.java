@@ -3,7 +3,6 @@ package src.saveeatback.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Slf4j
 @Component
 public class JwtUtils {
     @Value("${jwt.secret}")
@@ -45,7 +43,6 @@ public class JwtUtils {
             JWT.require(algorithm).build().verify(token);
             return true;
         }catch (JWTVerificationException exception){
-            log.warn("JWT invalid {}", exception.getMessage());
         }
         return false;
     }

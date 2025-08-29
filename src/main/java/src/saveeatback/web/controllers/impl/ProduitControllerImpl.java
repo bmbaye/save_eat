@@ -11,10 +11,7 @@ import src.saveeatback.exceptions.EntityNotFoundException;
 import src.saveeatback.services.ProduitService;
 import src.saveeatback.web.controllers.ProduitController;
 import src.saveeatback.web.dtos.responses.RestResponse;
-import src.saveeatback.web.dtos.responses.produits.ProduitCatalogueResponse;
-import src.saveeatback.web.dtos.responses.produits.SingleProduitResponse;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

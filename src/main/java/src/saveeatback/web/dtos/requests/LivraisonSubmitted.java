@@ -2,15 +2,10 @@ package src.saveeatback.web.dtos.requests;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import src.saveeatback.datas.entities.Livreur;
-import src.saveeatback.datas.enums.HoraireLivraison;
-import src.saveeatback.datas.enums.TypeLivraison;
 import src.saveeatback.utils.validators.ValidTypeLivraison;
 
 import java.util.Date;
 
-@Getter
 public class LivraisonSubmitted {
     @ValidTypeLivraison
     private String type;
@@ -23,4 +18,24 @@ public class LivraisonSubmitted {
     private String ville;
     @NotNull
     private String rue;
+
+    public String getType() {
+        return type;
+    }
+
+    public String getRue() {
+        return rue;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public String getHoraire() {
+        return horaire;
+    }
+
+    public Date getDateLivraison() {
+        return dateLivraison;
+    }
 }

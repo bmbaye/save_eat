@@ -1,13 +1,11 @@
 package src.saveeatback.datas.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import src.saveeatback.datas.enums.RoleUser;
 
-@Getter
-@Setter
+
 @Document(collection = "roles")
 public class Role {
     @Id
@@ -16,5 +14,21 @@ public class Role {
 
     Role(RoleUser roleUSer){
         this.nomRole = roleUSer.name();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNomRole() {
+        return nomRole;
+    }
+
+    public void setNomRole(String nomRole) {
+        this.nomRole = nomRole;
     }
 }

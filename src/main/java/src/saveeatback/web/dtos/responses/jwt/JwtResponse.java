@@ -1,12 +1,8 @@
 package src.saveeatback.web.dtos.responses.jwt;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 
-@Getter
-@Setter
+
 public class JwtResponse {
     private String token;
     private String type;
@@ -14,6 +10,30 @@ public class JwtResponse {
     private String username;
     private String email;
     private List<String> roles;
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
 
     public static class Builder{
         private String token;
