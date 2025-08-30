@@ -77,8 +77,7 @@ public class AuthControllerImpl implements AuthController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
-        Set<String> roles = new HashSet<>();
-        signupRequest.getRoles().stream().map(roles::add);
+        List<String> roles = new ArrayList<>(signupRequest.getRoles());
 
 
         Utilisateur user =new Utilisateur(signupRequest.getUsername(),signupRequest.getEmail(),encoder.encode(signupRequest.getPassword()),roles);

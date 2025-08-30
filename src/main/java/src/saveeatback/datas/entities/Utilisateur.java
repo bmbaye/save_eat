@@ -4,7 +4,7 @@ package src.saveeatback.datas.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,8 +15,8 @@ public class Utilisateur {
     private String username;
     private String email;
     private String password;
-    private Set<String> roles;
-    public Utilisateur(String username, String email, String password, Set<String> roles) {
+    private List<String> roles;
+    public Utilisateur(String username, String email, String password, List<String> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -42,7 +42,7 @@ public class Utilisateur {
         return password;
     }
 
-    public Set<String> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
@@ -62,7 +62,7 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }

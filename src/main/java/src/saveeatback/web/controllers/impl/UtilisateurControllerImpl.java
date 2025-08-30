@@ -45,7 +45,7 @@ public class UtilisateurControllerImpl implements UtilisateurController {
             return new ResponseEntity<>(restResponse,HttpStatus.BAD_REQUEST);
         }
 
-        Utilisateur user = this.userMapper.signupDtoToUser(userRequest);
+        Utilisateur user = this.userMapper.signupDtoToUser(userRequest, this.passwordEncoder);
         var userPosted = this.userService.create(user);
         if(userPosted !=null){
             UserCreateResponse userResponse = this.userMapper.toUserCreateResponse(userPosted);

@@ -1,8 +1,9 @@
 package src.saveeatback.utils.mappers;
 
-import org.mapstruct.*;
+import org.mapstruct.Context;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import src.saveeatback.datas.entities.Utilisateur;
 import src.saveeatback.web.dtos.requests.SignupRequest;
@@ -13,14 +14,8 @@ public interface UtilisateurMapper {
 
     UtilisateurMapper INSTANCE = Mappers.getMapper(UtilisateurMapper.class);
 
-    @Mapping(target = "roles", expression = "java(new java.util.HashSet<>(signupDto.getRoles()))")
-    @Mapping(target = "password", ignore = true)
-    Utilisateur signupDtoToUser(SignupRequest signupDto);
-
-    @AfterMapping
-    default void encodePassword(SignupRequest dto, @MappingTarget Utilisateur utilisateur, @Context BCryptPasswordEncoder encoder) {
-        utilisateur.setPassword(encoder.encode(dto.getPassword()));
-    }
+    @Mapping(target = "password", expression = "java(passwordEncoder.encode(signupDto.getPassword()))")
+    Utilisateur signupDtoToUser(SignupRequest signupDto, @Context PasswordEncoder passwordEncoder);
 
     UserCreateResponse toUserCreateResponse(Utilisateur utilisateur);
 }
