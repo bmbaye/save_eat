@@ -14,7 +14,7 @@ public interface UtilisateurMapper {
 
     UtilisateurMapper INSTANCE = Mappers.getMapper(UtilisateurMapper.class);
 
-    @Mapping(target = "password", expression = "java(passwordEncoder.encode(signupDto.getPassword())")
+    @Mapping(target = "password", expression = "java(passwordEncoder.encode(signupDto.getPassword()))")
     Utilisateur signupDtoToUser(SignupRequest signupDto, @Context PasswordEncoder passwordEncoder);
 
     UserCreateResponse toUserCreateResponse(Utilisateur utilisateur);
