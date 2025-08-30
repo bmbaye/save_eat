@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 import src.saveeatback.datas.entities.Utilisateur;
@@ -25,6 +26,9 @@ public class UtilisateurControllerImpl implements UtilisateurController {
     @Autowired
     private UtilisateurMapper userMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     UtilisateurControllerImpl(UtilisateurService userService, UtilisateurMapper userMapper){
         this.userService =userService;
         this.userMapper = userMapper;
@@ -41,7 +45,7 @@ public class UtilisateurControllerImpl implements UtilisateurController {
             return new ResponseEntity<>(restResponse,HttpStatus.BAD_REQUEST);
         }
 
-        Utilisateur user = this.userMapper.signupDtoToUser(userRequest);
+        Utilisateur user = this.userMapper.signupDtoToUser(userRequest, this.passwordEncoder);
         var userPosted = this.userService.create(user);
         if(userPosted !=null){
             UserCreateResponse userResponse = this.userMapper.toUserCreateResponse(userPosted);

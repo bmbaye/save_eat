@@ -15,6 +15,7 @@ import src.saveeatback.datas.entities.Utilisateur;
 import src.saveeatback.datas.repositories.UtilisateurRepository;
 import src.saveeatback.security.JwtUtils;
 import src.saveeatback.security.UserDetailsImpl;
+import src.saveeatback.utils.mappers.UtilisateurMapper;
 import src.saveeatback.web.dtos.requests.LoginRequest;
 import src.saveeatback.web.dtos.requests.SignupRequest;
 import src.saveeatback.web.dtos.responses.RestResponse;
@@ -27,6 +28,9 @@ public class AuthControllerImpl implements AuthController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    UtilisateurMapper userMapper;
 
     @Autowired
     UtilisateurRepository userRepository;
