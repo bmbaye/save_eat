@@ -3,11 +3,13 @@ package src.saveeatback.datas.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.web.multipart.MultipartFile;
 import src.saveeatback.datas.enums.ProduitCategorie;
 import src.saveeatback.datas.enums.ProduitEtat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @Document(collection = "produits")
@@ -18,13 +20,13 @@ public class Produit {
     private Double prix;
     private Integer qteStock;
     private String description;
-    private String[] images;
+    private List<String> images;
     private ProduitCategorie categorie;
     private ProduitEtat etat;
     private LocalDateTime dateExpiration;
     private Boolean promo;
 
-    public Produit(String id, String libelle, Double prix, Integer qteStock, String description, String[] images, ProduitCategorie categorie, ProduitEtat etat, LocalDateTime dateExpiration, Boolean promo) {
+    public Produit(String id, String libelle, Double prix, Integer qteStock, String description, List<String> images, ProduitCategorie categorie, ProduitEtat etat, LocalDateTime dateExpiration, Boolean promo) {
         this.id = id;
         this.libelle = libelle;
         this.prix = prix;
@@ -60,7 +62,7 @@ public class Produit {
         return description;
     }
 
-    public String[] getImages() {
+    public List<String> getImages() {
         return images;
     }
 
@@ -100,7 +102,7 @@ public class Produit {
         this.description = description;
     }
 
-    public void setImages(String[] images) {
+    public void setImages(List<String> images) {
         this.images = images;
     }
 

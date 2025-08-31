@@ -15,8 +15,8 @@ public class Utilisateur {
     private String username;
     private String email;
     private String password;
-    private List<String> roles;
-    public Utilisateur(String username, String email, String password, List<String> roles) {
+    private List<Role> roles;
+    public Utilisateur(String username, String email, String password, List<Role> roles) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -42,7 +42,7 @@ public class Utilisateur {
         return password;
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
@@ -62,7 +62,7 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

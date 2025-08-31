@@ -11,7 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 import src.saveeatback.controllers.AuthController;
+import src.saveeatback.datas.entities.Role;
 import src.saveeatback.datas.entities.Utilisateur;
+import src.saveeatback.datas.repositories.RoleRepository;
 import src.saveeatback.datas.repositories.UtilisateurRepository;
 import src.saveeatback.security.JwtUtils;
 import src.saveeatback.security.UserDetailsImpl;
@@ -36,6 +38,9 @@ public class AuthControllerImpl implements AuthController {
     UtilisateurRepository userRepository;
 
     @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
     JwtUtils jwtUtils;
 
     @Autowired
@@ -51,8 +56,9 @@ public class AuthControllerImpl implements AuthController {
         String jwtToken = jwtUtils.generateToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority).toList();
+        List<Role> roles = userDetails.getAuthorities().stream()
+                .map(auth -> roleRepository.findByNomRole(auth.getAuthority())
+                        .orElseThrow(() -> new RuntimeException("Rôle introuvable: " + auth.getAuthority()))).toList();
         JwtResponse jwtResponse = JwtResponse.builder()
                 .setEmail(userDetails.getEmail())
                 .setId(userDetails.getId())
@@ -76,8 +82,13 @@ public class AuthControllerImpl implements AuthController {
             Map<String, Object> response = RestResponse.response("Cet email appartient a un utilisateur !", HttpStatus.BAD_REQUEST, "ErrorSignup");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-
-        List<String> roles = new ArrayList<>(signupRequest.getRoles());
+        List<Role> rolesList = new ArrayList<>();
+        for(String role: signupRequest.getRoles()){
+            Role roleEntity = new Role();
+            roleEntity.setNomRole(role);
+            rolesList.add(roleEntity);
+        }
+        List<Role> roles = new ArrayList<>(rolesList);
 
 
         Utilisateur user =new Utilisateur(signupRequest.getUsername(),signupRequest.getEmail(),encoder.encode(signupRequest.getPassword()),roles);

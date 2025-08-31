@@ -1,5 +1,7 @@
 package src.saveeatback.web.dtos.responses.jwt;
 
+import src.saveeatback.datas.entities.Role;
+
 import java.util.List;
 
 
@@ -9,7 +11,7 @@ public class JwtResponse {
     private String id;
     private String username;
     private String email;
-    private List<String> roles;
+    private List<Role> roles;
 
     public String getToken() {
         return token;
@@ -31,7 +33,7 @@ public class JwtResponse {
         return email;
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
@@ -41,7 +43,7 @@ public class JwtResponse {
         private String id;
         private String username;
         private String email;
-        private List<String> roles;
+        private List<Role> roles;
 
         public Builder setToken(String token){
             this.token = token;
@@ -63,7 +65,7 @@ public class JwtResponse {
             this.email = email;
             return this;
         }
-        public Builder setRoles(List<String> roles){
+        public Builder setRoles(List<Role> roles){
             this.roles = roles;
             return this;
         }

@@ -76,9 +76,13 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>1.5.1.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44 -->
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.39.0</version>
+        </dependency>
     </dependencies>
-
-
 
     <build>
 		<plugins>

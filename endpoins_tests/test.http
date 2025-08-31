@@ -1,0 +1,29 @@
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "bmbaye",
+  "password": "bmbaye2400"
+}
+
+###
+POST http://localhost:8080/api/v1/roles
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibWJheWUiLCJpYXQiOjE3NTY1NjkyNzMsImV4cCI6MTc1NjY1NTY3Mywicm9sZXMiOltdfQ.IbdKqVCGhX8RToW3J0JiWe0bKF59JB6oHnZ93LBW75g
+
+{
+    "nom": "ROLE_ADMIN"
+}
+
+###
+POST http://localhost:8080/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "username": "bmbaye",
+  "email": "bmbaye24@gmail.com",
+  "password": "bmbaye2400",
+  "roles": ["ROLE_ADMIN"]
+}
+###
+

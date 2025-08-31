@@ -7,15 +7,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
+import src.saveeatback.datas.entities.Role;
 import src.saveeatback.datas.entities.Utilisateur;
 import src.saveeatback.services.UtilisateurService;
+import src.saveeatback.utils.mappers.RoleMapper;
 import src.saveeatback.utils.mappers.UtilisateurMapper;
 import src.saveeatback.web.controllers.UtilisateurController;
+import src.saveeatback.web.dtos.requests.RolePosted;
 import src.saveeatback.web.dtos.requests.SignupRequest;
 import src.saveeatback.web.dtos.responses.RestResponse;
 import src.saveeatback.web.dtos.responses.utilisateur.UserCreateResponse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,15 +28,16 @@ import java.util.Map;
 public class UtilisateurControllerImpl implements UtilisateurController {
     private final UtilisateurService userService;
 
-    @Autowired
-    private UtilisateurMapper userMapper;
+    private final UtilisateurMapper userMapper;
+    private final RoleMapper roleMapper;;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    UtilisateurControllerImpl(UtilisateurService userService, UtilisateurMapper userMapper){
+    UtilisateurControllerImpl(UtilisateurService userService, UtilisateurMapper userMapper, RoleMapper roleMapper){
         this.userService =userService;
         this.userMapper = userMapper;
+        this.roleMapper = roleMapper;
     }
 
 
@@ -46,6 +52,13 @@ public class UtilisateurControllerImpl implements UtilisateurController {
         }
 
         Utilisateur user = this.userMapper.signupDtoToUser(userRequest, this.passwordEncoder);
+        List<Role> roles = new ArrayList<>();
+        for(String role : userRequest.getRoles()){
+            RolePosted rolePosted = new RolePosted();
+            rolePosted.setNom(role);
+            roles.add(roleMapper.toRole(rolePosted));
+        }
+        user.setRoles(roles);
         var userPosted = this.userService.create(user);
         if(userPosted !=null){
             UserCreateResponse userResponse = this.userMapper.toUserCreateResponse(userPosted);

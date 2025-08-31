@@ -12,10 +12,6 @@ public class Role {
     private String id;
     private String nomRole;
 
-    Role(RoleUser roleUSer){
-        this.nomRole = roleUSer.name();
-    }
-
     public String getId() {
         return id;
     }
@@ -29,6 +25,13 @@ public class Role {
     }
 
     public void setNomRole(String nomRole) {
+        this.nomRole = nomRole;
+    }
+
+    public Role() {
+    }
+    public Role(String id, String nomRole) {
+        this.id = id;
         this.nomRole = nomRole;
     }
 }

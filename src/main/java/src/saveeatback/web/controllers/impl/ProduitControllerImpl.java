@@ -5,26 +5,61 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import src.saveeatback.datas.entities.Produit;
 import src.saveeatback.exceptions.EntityNotFoundException;
 import src.saveeatback.services.ProduitService;
+import src.saveeatback.services.impl.CloudinaryService;
+import src.saveeatback.utils.mappers.ProduitMapper;
 import src.saveeatback.web.controllers.ProduitController;
+import src.saveeatback.web.dtos.requests.ProduitPosted;
 import src.saveeatback.web.dtos.responses.RestResponse;
+import src.saveeatback.web.dtos.responses.produits.ProduitCreatedResponse;
 
-import java.util.Map;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @Tag(name = "produits", description = "gestion produits")
 public class ProduitControllerImpl implements ProduitController {
 
     private final ProduitService produitService;
-//    private final ProduitMapper produitMapper;
+    private final ProduitMapper produitMapper;
+    private final CloudinaryService cloudinaryService;
 
-    public ProduitControllerImpl(ProduitService produitService){
+    public ProduitControllerImpl(ProduitService produitService, ProduitMapper produitMapper, CloudinaryService cloudinaryService) {
         this.produitService =produitService;
-//        this.produitMapper = produitMapper;
+        this.produitMapper = produitMapper;
+        this.cloudinaryService = cloudinaryService;
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> createProduit(ProduitPosted produitRequest, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            bindingResult.getFieldErrors().forEach(err ->errors.put(err.getField(), err.getDefaultMessage()));
+
+            Map<String, Object> restResponse = RestResponse.response(errors, HttpStatus.BAD_REQUEST, "errors");
+            return new ResponseEntity<>(restResponse,HttpStatus.BAD_REQUEST);
+        }
+        try {
+            List<String> imagesUrl = new ArrayList<>();
+            for(MultipartFile image : produitRequest.getImages()){
+                String url = this.cloudinaryService.uploadImage(image);
+                imagesUrl.add(url);
+            }
+            Produit produit = this.produitMapper.toProduit(produitRequest);
+            Produit produitAdded = this.produitService.create(produit);
+
+            ProduitCreatedResponse produitCreatedResponse = this.produitMapper.toProduitCreatedResponse(produitAdded);
+
+            Map<String, Object> restResponse = RestResponse.response(produitCreatedResponse, HttpStatus.CREATED, "produitCreatedResponse");
+            return new ResponseEntity<>(restResponse,HttpStatus.CREATED);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
