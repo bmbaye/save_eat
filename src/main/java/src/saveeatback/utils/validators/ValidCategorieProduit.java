@@ -4,6 +4,7 @@ package src.saveeatback.utils.validators;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import org.springframework.data.mongodb.core.mapping.Document;
+import src.saveeatback.utils.validators.impl.ValidCategorieProduitValidator;
 import src.saveeatback.utils.validators.impl.ValidTypeLivraisonValidator;
 
 import java.lang.annotation.ElementType;
@@ -14,7 +15,7 @@ import java.lang.annotation.Target;
 @Document
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidTypeLivraisonValidator.class)
+@Constraint(validatedBy = ValidCategorieProduitValidator.class)
 public @interface ValidCategorieProduit {
     String message() default "La categorie est invalide !!";
     Class<?>[] groups() default {};
