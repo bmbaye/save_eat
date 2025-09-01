@@ -12,6 +12,9 @@ public class ValidTypePaiementValidator implements ConstraintValidator<ValidType
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(value == null){
+            return false;
+        }
         return value.equalsIgnoreCase("cash")
                 || value.equalsIgnoreCase("wave")
                 || value.equalsIgnoreCase("orange_money");

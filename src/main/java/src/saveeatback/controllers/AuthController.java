@@ -2,6 +2,7 @@ package src.saveeatback.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,4 +19,6 @@ public interface AuthController {
 
     @PostMapping("/signup")
     ResponseEntity<Map<String,Object>> register(@RequestBody @Valid SignupRequest signupRequest);
+    @GetMapping("/verify")
+    public ResponseEntity<String> verify();
 }

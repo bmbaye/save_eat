@@ -12,6 +12,9 @@ public class ValidQuantityValidator implements ConstraintValidator<ValidQuantity
 
     @Override
     public boolean isValid(Integer qte, ConstraintValidatorContext constraintValidatorContext) {
+        if(qte == null){
+            return false;
+        }
         return qte >0;
     }
 }

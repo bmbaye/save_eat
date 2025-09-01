@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import src.saveeatback.web.dtos.requests.ProduitPosted;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 import java.util.Map;
 

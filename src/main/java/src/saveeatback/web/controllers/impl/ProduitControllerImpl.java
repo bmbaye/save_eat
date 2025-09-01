@@ -41,34 +41,33 @@ public class ProduitControllerImpl implements ProduitController {
             Map<String, String> errors = new HashMap<>();
             bindingResult.getFieldErrors().forEach(err -> errors.put(err.getField(), err.getDefaultMessage()));
 
-            Map<String, Object> restResponse = RestResponse.response(errors, HttpStatus.BAD_REQUEST, "errors");
-            return new ResponseEntity<>(restResponse, HttpStatus.BAD_REQUEST);
+            Map<String, Object> restResponse = RestResponse.response(errors, HttpStatus.FORBIDDEN, "errors");
+            return new ResponseEntity<>(restResponse, HttpStatus.FORBIDDEN);
         }
 
         try {
-            // 1. Upload images to Cloudinary et récupérer les URLs
+            System.out.println("Les erreurs");
+            System.out.println(bindingResult.hasErrors());
             List<String> imagesUrl = new ArrayList<>();
+            System.out.println("La taille " + produitRequest.getImages().size());
             for (MultipartFile image : produitRequest.getImages()) {
                 String url = this.cloudinaryService.uploadImage(image);
                 imagesUrl.add(url);
             }
 
-            // 2. Mapper le DTO en entité
             Produit produit = this.produitMapper.toProduit(produitRequest);
 
-            // 3. Assigner les URLs des images
             produit.setImages(imagesUrl);
 
-            // 4. Sauvegarder en base
             Produit produitAdded = this.produitService.create(produit);
 
-            // 5. Mapper la réponse
             ProduitCreatedResponse produitCreatedResponse = this.produitMapper.toProduitCreatedResponse(produitAdded);
 
             Map<String, Object> restResponse = RestResponse.response(produitCreatedResponse, HttpStatus.CREATED, "produitCreatedResponse");
             return new ResponseEntity<>(restResponse, HttpStatus.CREATED);
 
         } catch (IOException e) {
+            System.out.println("Erreur lors de l'upload");
             throw new RuntimeException(e);
         }
     }

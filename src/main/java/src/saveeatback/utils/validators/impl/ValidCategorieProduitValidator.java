@@ -12,6 +12,9 @@ public class ValidCategorieProduitValidator implements ConstraintValidator<Valid
 
     @Override
     public boolean isValid(String categorie, ConstraintValidatorContext constraintValidatorContext) {
+        if(categorie == null){
+            return false;
+        }
         return categorie.equalsIgnoreCase("fruit") || categorie.equalsIgnoreCase("legume");
     }
 }

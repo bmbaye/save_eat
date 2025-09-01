@@ -12,6 +12,9 @@ public class ValidPrixValidator implements ConstraintValidator<ValidPrix, Double
 
     @Override
     public boolean isValid(Double prix, ConstraintValidatorContext constraintValidatorContext) {
+        if(prix == null){
+            return false;
+        }
         return prix >0.0;
     }
 }

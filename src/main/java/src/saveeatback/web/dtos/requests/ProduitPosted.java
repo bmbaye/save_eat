@@ -18,7 +18,6 @@ public class ProduitPosted {
     @ValidQuantity
     private Integer qteStock;
     private String description;
-    @ListNotEmpty
     private List<MultipartFile> images;
     @ValidCategorieProduit
     private String categorie;
@@ -62,5 +61,41 @@ public class ProduitPosted {
 
     public Boolean getPromo() {
         return promo;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
+    }
+
+    public void setQteStock(Integer qteStock) {
+        this.qteStock = qteStock;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImages(List<MultipartFile> images) {
+        this.images = images;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie.toUpperCase();
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat.toUpperCase();
+    }
+
+    public void setDateExpiration(LocalDateTime dateExpiration) {
+        this.dateExpiration = dateExpiration;
+    }
+
+    public void setPromo(Boolean promo) {
+        this.promo = promo;
     }
 }

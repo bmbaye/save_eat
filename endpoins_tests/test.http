@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 POST http://localhost:8080/api/v1/roles
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibWJheWUiLCJpYXQiOjE3NTY1NjkyNzMsImV4cCI6MTc1NjY1NTY3Mywicm9sZXMiOltdfQ.IbdKqVCGhX8RToW3J0JiWe0bKF59JB6oHnZ93LBW75g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibWJheWUiLCJpYXQiOjE3NTY3NDQzNzQsImV4cCI6MTc1NjgzMDc3NCwicm9sZXMiOlsiUk9MRV9BRE1JTiJdfQ.o_oIa7OfMjiMH6jBTGc4fd7Y1N71G3Fp39RPTdzpR08
 
 {
     "nom": "ROLE_ADMIN"
@@ -25,5 +25,53 @@ Content-Type: application/json
   "password": "bmbaye2400",
   "roles": ["ROLE_ADMIN"]
 }
+###
+POST http://localhost:8080/api/v1/produits
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibWJheWUiLCJpYXQiOjE3NTY3NTAxMzcsImV4cCI6MTc1NjgzNjUzNywicm9sZXMiOlsiUk9MRV9BRE1JTiJdfQ.3LOdr8YQpopEotnflSCPdUWsMw3UFnXJalBXuylTUhI
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="libelle"
+
+Pomme de terre
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="prix"
+
+2000.0
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="qteStock"
+
+200
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Des pommes de terre frais et, mûres
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="categorie"
+
+legume
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="etat"
+
+disponible
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="dateExpiration"
+
+2027-08-31T14:30:00
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="promo"
+
+true
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="images"; filename="pasteque1.jpeg"
+Content-Type: image/jpeg
+
+< ../assets/images/pasteque1.jpeg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+GET http://localhost:8080/api/v1/produits?page=0&size=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJibWJheWUiLCJpYXQiOjE3NTY3NDM0NDMsImV4cCI6MTc1NjgyOTg0Mywicm9sZXMiOlsiUk9MRV9BRE1JTiJdfQ.5XS96eUAEgQxejE0CT3-np4OKVC6Je6fz-8CLa2Wl04
+
 ###
 

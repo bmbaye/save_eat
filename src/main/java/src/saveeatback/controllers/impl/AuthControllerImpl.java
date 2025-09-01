@@ -96,4 +96,9 @@ public class AuthControllerImpl implements AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @Override
+    public ResponseEntity<String> verify(){
+        return ResponseEntity.ok("Token valide !");
+    }
+
 }

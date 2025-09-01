@@ -12,6 +12,9 @@ public class ValidTypeLivraisonValidator implements ConstraintValidator<ValidTyp
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        if(value == null){
+            return false;
+        }
         return value.equalsIgnoreCase("simple") || value.equalsIgnoreCase("express");
     }
 }

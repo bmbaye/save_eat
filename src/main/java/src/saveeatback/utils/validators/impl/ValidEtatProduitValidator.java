@@ -12,6 +12,9 @@ public class ValidEtatProduitValidator implements ConstraintValidator<ValidEtatP
 
     @Override
     public boolean isValid(String etat, ConstraintValidatorContext constraintValidatorContext) {
-        return etat.equalsIgnoreCase("disponibe") || etat.equalsIgnoreCase("en_rupture") || etat.equalsIgnoreCase("archive");
+        if(etat == null){
+            return false;
+        }
+        return etat.equalsIgnoreCase("disponible") || etat.equalsIgnoreCase("en_rupture") || etat.equalsIgnoreCase("archive");
     }
 }
